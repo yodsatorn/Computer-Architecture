@@ -6,7 +6,8 @@
    - ส่วนประกอบของ CPU      ประกอบไปด้วย 1. ALU (Arithmetic Logic Unit) 2. Control Unit 3. Register
 
 **MIPS**
-<br>**MIPS Instruction format** 
+
+**MIPS Instruction format** 
 MIPS Instruction มีทั้งหมด 3 ประเภท และทุกคำสั่งมีขนาด 32 bit
 
 **R-format** : เป็นคำสั่งเกี่ยวกับการคำนวณทั้งทางคณิตศาสตร์และตรรกศาสตร์
