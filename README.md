@@ -12,7 +12,6 @@
 
 | R-Format |  |  |  |  |  |  
 | --------- | --------- | --------- | --------- | --------- | --------- |
-| Opcode บอกว่าเป็นคำสั่งอะไร | rs | rt| rd | shamt | func |
 | op | rs | rt| rd | shamt | func |
 
 | คำสั่ง |  |
@@ -22,11 +21,30 @@
 
 **I-format** : เป็นคำสั่งประเภทการTransferข้อมูล
 
-| I-Format |  |  |  |  |  |  
-| --------- | --------- | --------- | --------- | --------- | --------- |
-| Op | rs | rt| rd | shamt | func |   
+| I-Format |  |  |  |
+| --------- | --------- | --------- | --------- |
+| Op | rs | rt| value or offset |   
 
+| คำสั่ง |  |
+| --------- | --------- |
+| ALUi | alui $rt,$rs,value |
+| Data Transfer | lw $rt,offset($rs) |
+|  | lw $rt,offset($rs) |
+| Branch | beq $rs,$rt,offset |
 
+**J-format** : เป็นคำสั่งประเภทที่ให้Jumpไปทำงานที่ตำแหน่งอื่น
+
+|J-Format |  |
+| --------- | --------- |
+| op | absolute address | 
+
+| คำสั่ง |  |
+| --------- | --------- |
+| Jump | j address |
+| Jump&Link | jal address |
+
+**Von Neuman & Harvard Architectures**
+   - Von Neuman Architecture : เป็นสถาปัตยกรรมคอมพิวเตอร์ที่มี Memory
 
 ________________________________________________________________________________________________________________________________________
 
