@@ -9,19 +9,22 @@
 **MIPS Instruction format** : มีทั้งหมด 3 ประเภท และทุกคำสั่งมีขนาด 32 bit
 
 **R-format** : เป็นคำสั่งเกี่ยวกับการคำนวณทั้งทางคณิตศาสตร์และตรรกศาสตร์ (Math and Logic)
-   คำสั่ง
-   - ALU : alu $rd,$rs,$rt
-   - jr  :  jr $rs
 
 | R-Format |  |  |  |  |  |  
 | --------- | --------- | --------- | --------- | --------- | --------- |
+| Opcode บอกว่าเป็นคำสั่งอะไร | rs | rt| rd | shamt | func |
 | op | rs | rt| rd | shamt | func |
 
+| คำสั่ง |  |
+| --------- | --------- |
+| ALU | alu $rd,$rs,$rt |
+| jr | jr $rs |
+
 **I-format** : เป็นคำสั่งประเภทการTransferข้อมูล
-   คำสั่ง
-   - ALUi : alui $rt,$rs,value
-   - Data Transfer : lw $rt,offset($rs)
-                   : sw $rt,offset($rs)
+
+| I-Format |  |  |  |  |  |  
+| --------- | --------- | --------- | --------- | --------- | --------- |
+| Op | rs | rt| rd | shamt | func |   
 
 
 
