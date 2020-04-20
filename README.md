@@ -65,8 +65,8 @@
    * Single-cycle processor : เป็นคอมพิวเตอร์ที่มีการประมวลผลคำสั่งแต่ละคำสั่งจบใน 1 รอบ หรือ 1 Clock cycle ซึ่งทุกคำสั่งจะใช้เวลาในการประมวลผลเท่ากัน
    * Multi-cycle processor  : เป็นคอมพิวเตอร์ที่มีการประมวลผลคำสั่งแต่ละคำสั่งไม่ได้จบใน 1 รอบ หรือ 1 Clock cycle ซึ่งแต่ละคำสั่งใช้เวลาในการประมวลผล หรือ Clock cycle ไม่เท่ากัน 
    
- **Pipelining**
-   * เป็นการประมวลผลชุดคำสั่งที่มีความรวดเร็วกว่า Single-cycle และ Multi-cycle 
+ **Pipeline**
+   * เป็น Memory ที่เก็บเฉพาะคำสั่ง และจะมีการลำดับคำสั่งให้ใช้เวลาในการประมวลผลน้อยลง
 
 ________________________________________________________________________________________________________________________________________
 
@@ -91,50 +91,150 @@ ________________________________________________________________________________
 <br>5 bit ต่อมาคือ Shift amount
 <br>6 bit สุดท้ายคือ Fucntion ซึ่งจะเป็นตัวบอกว่าคำสั่งนี้จะให้ทำอะไร
 
-สามารถดูได้จากรูป ALU Decoder
+จะได้คำสั่งเป็น 000000 00011 00010 00100 00000 100000 : 32 bit โดยเป็นเลขฐาน 2
+<br>ซึ่งสามารถเปลี่ยนเป็นเลขฐาน 16 เป็น 00622020
+
+สามารถดูOpcode และ Functionได้จากรูป ALU Decoder
 
 ![image1](https://www.cise.ufl.edu/~mssz/CompOrg/Table4.3-MIPSdatapath-control.gif)
 
 ![image2](https://www.cise.ufl.edu/~mssz/CompOrg/Table4.2-MIPSdatapath-ALUcontrol.gif)
 
-จะได้คำสั่งเป็น 000000 00011 00010 00100 00000 100000 : 32 bit โดยเป็นเลขฐาน 2
-<br>ซึ่งสามารถเปลี่ยนเป็นเลขฐาน 16 เป็น 00622020
-
-
 
 ### ส่งการบ้านครั้งที่ 1
 
-[CLIP 1 "ADD" MIPS Instruction ](https://youtu.be/8yf97kqEWS8)
+[CLIP 1 : "ADD" MIPS Instruction ](https://youtu.be/8yf97kqEWS8)
    
+
 ### การบ้านครั้งที่ 2
 
 **การทำงานของ CPU**
 การทำงานของ MIPS CPU ตั้งแต่เปิดเครื่องขึ้นโดยตำแหน่งRegister แรกเมื่อเปิดเครื่องอาจจะอยู่ที่ตำแหน่ง Register 0 และจะมีการเปลี่ยนตำแหน่งRegisterไปเมื่อมีการทำงานในคำสั่งต่อๆไป
 
-**ตัวอย่าง** คำสั่งในภาษา Java แบบที่มนุษย์เข้าใจ
+**ตัวอย่าง** 
+
+==Java Language== (คำสั่งในภาษา Java แบบที่มนุษย์เข้าใจ)
+
+<br>...
+<br>int a = 10;
+<br>int b = 20;
+<br>int c = a + b;
+<br>...
+
+==Machine Language== (ภาษาที่คอมพิวเตอร์เข้าใจ)
+
+| ตำแหน่ง Register | คำสั่ง | | |
+| --------- | --------- | --------- | --------- |
+| 00000000 | 08400000 | //jump | ที่ Register ตำแหน่ง 00000000 มีคำสั่ง jump |
+| 00000004 | 1A000000 | //data | ที่ Register ตำแหน่ง 00000004 มีข้อมูลเก็บอยู่ |
+| 01000000 | 8C090004 | //lw $9,$0(4) | ที่ Register ตำแหน่ง 01000000 มีคำสั่ง Load ข้อมูล |
+| 01000004 | 8D210000 | //lw $1,$9(0) | ที่ Register ตำแหน่ง 01000004 มีคำสั่ง Load ข้อมูล |
+| 01000008 | 8D220004 | //lw $2,$9(4) | ที่ Register ตำแหน่ง 01000008 มีคำสั่ง Load ข้อมูล |
+| 0100000C | 00221820 | //add $3,$1,$2 | ที่ Register ตำแหน่ง 0100000C มีคำสั่ง ADD |
+| 01000010 | AD230008 | //sw $3,$9(8) | ที่ Register ตำแหน่ง 01000010 มีคำสั่ง Store ข้อมูล |
+| 1A000000 | 0000000A | //a | |
+| 1A000004 | 00000014 | //b | |
+| 1A000008 | 0000001E | //c | |
+
+### ส่งการบ้านครั้งที่ 2
+
+[CLIP 2 : CPU MIPS Processing](https://youtu.be/UWN1qYOEa64)
 
 
-[CLIP 2](https://youtu.be/UWN1qYOEa64)
+### การบ้านครั้งที่ 3
+
+**Single-cycle vs. Multi-cycle**
+
+| Single-cycle | Multi-cycle |
+| --------- | --------- |
+| มี ALU 3 ตัว | มี ALU 1 ตัว |
+| ทำงานจบใน 1 cycleต่อคำสั่ง | 1 คำสั่งไม่ได้ทำงานจบได้ใน 1 cycle |
+| มี Memory 2 ตัว | มี Memory 1 ตัว |
+| ทุกคำสั่งใช้เวลาในการประมวลผลเท่ากัน | แต่ละคำสั่งใช้เวลาในการประมวลผลไม่เท่ากัน |
+
+- Single-cycle
+
+![image3](https://i.stack.imgur.com/vCvw1.png)
+
+- Multi-cycle 
+
+![image4](https://camo.githubusercontent.com/3a759f503101d7359e3b9e88a79a64b022814d5a/68747470733a2f2f692e696d6775722e636f6d2f6d5758485770542e706e67)
+
+### ส่งการบ้านครั้งที่ 3
+
+[CLIP 3 : Comparison of Single-cycle vs. Multi-cycle](https://youtu.be/rQwzcYdYeCE)
 
 
+### การบ้านครั้งที่ 4
 
-* [CLIP 3](https://youtu.be/rQwzcYdYeCE)
+**การทำงานของคำสั่ง lw ใน CPU แบบ Multi-cycle**
 
-  * อธิบายความแตกต่างกันของ CPU แบบ Single-cycle และ Multi-cycle ที่แตกต่างกันอย่างชัดเจนก็จะเป็น เวลาในการทำงานของคำสั่งต่างๆ โดยที่แบบ Single-cycle นั้นทุกคำสั่งจะใช้เวลาเท่ากัน มี ALU 3 ตัว และมี Memory 1 ตัว แต่แบบ Multi-cycle แต่ละคำสั่งจะใช้เวลาในการทำงานไม่เท่ากัน มี ALU 1 ตัว และมี Memory 2 ตัว
+* การทำงานของคำสั่ง lw ใน cpu แบบ Multi-cycle นั้นมี cycle หรือ step ในการทำงานทั้งหมดอยู่ 5 step
+   * Step 1 : การอ่านคำสั่ง โดยมีการดึงคำสั่งมาจากMemory
+   * Step 2 : การแปลคำสั่ง 
+   * Step 3 : การประมวลผล หรือ การคำนวณ โดยมีการนำค่าที่อยู่ใน Register rs + offset ไปเก็บที่ ALUout ซึ่งเกิดการทำงานหรือประมวลผลที่ ALU
+   * Step 4 : นำค่าที่ได้จากการประมวลผลส่งไปที่ MDR
+   * Step 5 : นำค่าที่เก็บไว้ที่ MDR ส่งไปเก็บไว้ยัง Register rt
+   
+- รูปตัวอย่าง CPU แบบ Multi-cycle 
 
-* [CLIP 4](https://youtu.be/CVvfJFUkybk)
- 
-  * อธิบายขั้นตอนการทำงานของคำสั่ง lw ใน CPU แบบ Multi-cyle ซึ่งเป็นคำสั่งที่เป็นการโหลดข้อมูลมาเก็บไว้ใน Register โดยที่คำสั่ง lw จะมีStepในการทำงานอยู่ 5 Step 
+![image5](https://camo.githubusercontent.com/3a759f503101d7359e3b9e88a79a64b022814d5a/68747470733a2f2f692e696d6775722e636f6d2f6d5758485770542e706e67)
 
-* [CLIP 5](https://youtu.be/y_5s8D-EJ9o)
+### ส่งการบ้านครั้งที่ 4
 
-  * อธิบายขั้นตอนการทำงานของคำสั่ง beq ใน Multi-cycle CPUซึ่งจะทำการเปรียบเทียบค่าสองค่าว่าเท่ากันหรือไม่ โดยคำสั่ง beq นั้นจะมี Step ในการทำงานอยู่ 3 Step
+[CLIP 4 : lw Instruction step in Multi-cycle CPU](https://youtu.be/CVvfJFUkybk)
 
-* [CLIP 6](https://youtu.be/Pz49OCkp3S4)
 
-  * อธิบายเกี่ยวกับ State Machine ของคำสั่ง R-Format ในMIPS
+### การบ้านครั้งที่ 5
 
-* [CLIP 7]
+**การทำงานของคำสั่ง beq ใน CPU แบบ Multi-cycle**
+
+* การทำงานของคำสั่ง beq (Branch on equal) ใน CPU แบบ MIPS จะมี step ในการทำงานด้วยกันอยู่ 3 step
+   * Step 1 : การอ่านคำสั่ง โดยมีการดึงคำสั่งมาจาก Memory 
+   * Step 2 : แปลคำสั่ง มีการนำค่า ที่อยู่ใน register rs และ rt มาเก็บไว้ใน A และ B ดังในรูปของวงจร CPU แบบ Multi-cycle
+   * Step 3 : การคำนวณ มีการนำค่าใน A และ B มาเปรียบเทียบกันว่าเท่ากันหรือไม่ ถ้าหากว่าเท่ากัน ก็จะส่งผลลัพธ์ที่ได้ออกไปทาง ALUout ส่งไปยัง PC
+   
+- รูปตัวอย่าง CPU แบบ Multi-cycle 
+
+![image5](https://camo.githubusercontent.com/3a759f503101d7359e3b9e88a79a64b022814d5a/68747470733a2f2f692e696d6775722e636f6d2f6d5758485770542e706e67)
+
+### ส่งการบ้านครั้งที่ 5
+
+[CLIP 5 : beq Instruction step in Multi-cycle CPU](https://youtu.be/y_5s8D-EJ9o)
+
+
+### การบ้านครั้งที่ 6 
+
+**State Machine ของคำสั่ง R-format**
+
+- รูปตัวอย่าง CPU แบบ Multi-cycle
+
+![image6](https://camo.githubusercontent.com/3a759f503101d7359e3b9e88a79a64b022814d5a/68747470733a2f2f692e696d6775722e636f6d2f6d5758485770542e706e67)
+
+* State Machine ของคำสั่ง R-format มีทั้งหมด 4 State โดยแต่ละ State จะมีสัญญาณ(เส้นสีส้ม) ดังรูป เพื่อส่งสัญญาณให้แต่ละส่วนทำงาน
+   * State ที่ 1 : มีสัญญาณ Memread,lorD,IRWrite,ALUSrcA,ALUSrcB,ALUOP,PCWrite,PCSource ทำงาน
+   * State ที่ 2 : มีสัญญาณ ALUSrcA,ALUSrcB,ALUOP ทำงาน
+   * State ที่ 3 : มีสัญญาณ ALUSrcA,ALUSrcB,ALUOP ทำงาน
+   * State ที่ 4 : มีสัญญาณ RegWrite,MemtoReg,RegDst ทำงาน
+
+### ส่งการบ้านครั้งที่ 6
+
+[CLIP 6 : R-format State Machine](https://youtu.be/Pz49OCkp3S4)
+
+
+### การบ้านครั้งที่ 7 
+
+**Pipeline**
+
+* Pipeline คือ Memory ที่เก็บเฉพาะชุดคำสั่ง โดยจะมีการลำดับคำสั่งให้มีความรวดเร็วในการประมวลผลเพิ่มขึ้น เรียกว่า Pipelining หลักการคือ ในแต่ละคำสั่งจะมีการซ้อนทับกัน โดยที่เมื่อคำสั่งแรก ทำงานในหน่วยประมวลผลส่วน ที่ 1 จบไปแล้ว และไปเริ่มทำงานในส่วนที่ 2 คำสั่ง 2 ก็จะไปเริ่มทำงานในหน่วยประมวลผลส่วนที่ 1 ต่อ โดยที่ไม่ต้องรอให้คำสั่งแรกทำงานจบทั้งหมดก่อน
+
+- รูปแสดงการทำงานของ CPU ที่เป็น non-pipelined และ pipelined
+
+![image7](https://lh3.googleusercontent.com/proxy/OzNpyji_vV5hRl9Gyv0ARWuxmInuqKcluLv5ApJdZJrgwIZY4BJbD5sCuKR_Z4vxCY-QZoHTaEgaJ1v-wPHnKhbBL1UskBG8DLy7mKkQuOruUYyB1sGeAiDZRQ)
+
+### ส่งการบ้านครั้งที่ 7
+
+[CLIP 7]
 
 
 ________________________________________________________________________________________________________________________________________
