@@ -54,7 +54,7 @@
       * รูปแบบชุดคำสั่งมีหลากหลาย
       * มี Register ชุดเดียว
       * ชุดคำสั่งเป็นแบบ Multi-cycle
-    * RISC ย่อมาจาก Reduced instruction set computer : เป็นคอมพิวเตอร์ที่มีชุดคำสั่งน้อย
+   * RISC ย่อมาจาก Reduced instruction set computer : เป็นคอมพิวเตอร์ที่มีชุดคำสั่งน้อย
       * มีเพียงคำสั่ง Load และ Store ที่มี Reference ถึง Memory
       * Program code มีขนาดใหญ่
       * รูปแบบชุดคำสั่งตายตัว
