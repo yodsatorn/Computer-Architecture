@@ -237,10 +237,12 @@ ________________________________________________________________________________
 - รูปแสดงการทำงานของ CPU ที่เป็น non-pipelined และ pipelined
 
 **แบบ non-pipelined**
+
 ![image7](https://cs.stanford.edu/people/eroberts/courses/soco/projects/risc/pipelining/laundry1.gif)
 
 **แบบ Pipelined**
-![image8]()
+
+![image8](https://cs.stanford.edu/people/eroberts/courses/soco/projects/risc/pipelining/laundry2.gif)
 
 ### ส่งการบ้านครั้งที่ 7
 
