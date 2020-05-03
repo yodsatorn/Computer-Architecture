@@ -236,7 +236,7 @@ ________________________________________________________________________________
 
 - รูปแสดงการทำงานของ CPU ที่เป็น non-pipelined และ pipelined
 
-![image7](https://lh3.googleusercontent.com/proxy/OzNpyji_vV5hRl9Gyv0ARWuxmInuqKcluLv5ApJdZJrgwIZY4BJbD5sCuKR_Z4vxCY-QZoHTaEgaJ1v-wPHnKhbBL1UskBG8DLy7mKkQuOruUYyB1sGeAiDZRQ)
+![image7](https://www.cs.fsu.edu/~hawkes/cda3101lects/chap6/F6.1.gif)
 
 ### ส่งการบ้านครั้งที่ 7
 
